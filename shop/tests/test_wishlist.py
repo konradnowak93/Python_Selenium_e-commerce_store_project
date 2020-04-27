@@ -49,7 +49,7 @@ class TestWishlist:
         assert "successfully removed" in self.driver.find_element_by_class_name(WishlistLocators.successfully_removed_class).text
 
     @allure.title("Select product options")
-    def test_select_product_options(self, setup):
+    def test_select_product_options_btn(self, setup):
         self.driver.get("http://shop.demoqa.com/shop/")
         main_page = MainPage(self.driver)
         products_list = ProductsList(self.driver)
