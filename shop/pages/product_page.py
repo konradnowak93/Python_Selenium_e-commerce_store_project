@@ -30,3 +30,7 @@ class ProductPage:
     def view_cart(self):
         view_cart_button = self.driver.find_element_by_xpath(ProductPageLocators.view_cart_xpath)
         webdriver.ActionChains(self.driver).move_to_element(view_cart_button).click(view_cart_button).perform()
+
+    def get_product_price(self):
+        price = self.driver.find_element_by_xpath(ProductPageLocators.product_price_xpath).text
+        return price

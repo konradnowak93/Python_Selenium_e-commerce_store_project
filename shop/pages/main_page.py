@@ -36,3 +36,7 @@ class MainPage:
 
     def click_on_main_logo(self):
         self.driver.find_element_by_class_name(MainPageLocators.main_logo_class).click()
+
+    def get_product_price(self):
+        price = self.driver.find_element_by_xpath(MainPageLocators.product_price_xpath).text
+        return price

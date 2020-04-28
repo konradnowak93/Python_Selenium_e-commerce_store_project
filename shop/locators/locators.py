@@ -9,6 +9,8 @@ class MainPageLocators:
     shopping_cart_xpath = "//*[@id='nav-menu-item-cart']/a/span/span[2]"
     main_logo_class = "custom-logo"
     page_title_class = "page-title"
+    cart_count_class = "cart-count"
+    product_price_xpath = "//*[@id='nav-menu-item-cart']/a/span/span[2]/span"
 
 class MyAccountLocators:
 
@@ -34,6 +36,7 @@ class ProductPageLocators:
     add_to_cart_second_product_xpath = "//*[@id='product-1485']/div[1]/div[2]/form/div/div[2]/button"
     product_added_to_cart_class = "woocommerce-message"
     view_cart_xpath = "//*[@id='noo-site']/div[2]/div/div/div[1]/div/a"
+    product_price_xpath = "//*[@id='product-1162']/div[1]/div[2]/form/div/div[1]/div[2]/span/ins/span"
 
 class WishlistLocators:
     remove_from_wishlist_button_xpath = "//*[@id='yith-wcwl-row-1162']/td[1]/div/a"
@@ -52,6 +55,7 @@ class ShoppingCartLocators:
     successfully_removed_class = "woocommerce-message"
     successfully_emptied_xpath = "//*[@id='post-6']/div/div/p[1]"
     successfully_updated_xpath = "//*[@id='post-6']/div/div/div[1]"
+    product_price_xpath = "//*[@id='post-6']/div/div/form/table/tbody/tr[1]/td[3]/span"
 
 class CheckoutLocators:
     order_review_heading_id = "order_review_heading"

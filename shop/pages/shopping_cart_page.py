@@ -35,3 +35,7 @@ class ShoppingCartPage:
     def proceed_to_checkout(self):
         proceed_to_checkout_btn = self.driver.find_element_by_xpath(ShoppingCartLocators.proceed_to_checkout_xpath)
         webdriver.ActionChains(self.driver).move_to_element(proceed_to_checkout_btn).click(proceed_to_checkout_btn).perform()
+
+    def get_product_price(self):
+        price = self.driver.find_element_by_xpath(ShoppingCartLocators.product_price_xpath).text
+        return price

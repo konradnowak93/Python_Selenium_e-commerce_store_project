@@ -1,6 +1,7 @@
 import allure
 import pytest
-from shop.locators.locators import ProductPageLocators, ShoppingCartLocators, ProductsListLocators, CheckoutLocators
+from shop.locators.locators import ProductPageLocators, ShoppingCartLocators, ProductsListLocators, CheckoutLocators, \
+    MainPageLocators
 from shop.pages.main_page import MainPage
 from shop.pages.product_page import ProductPage
 from shop.pages.products_list_page import ProductsList
@@ -15,6 +16,7 @@ class TestShoppingCart:
         main_page = MainPage(self.driver)
         products_list = ProductsList(self.driver)
         product_page = ProductPage(self.driver)
+        shopping_cart = ShoppingCartPage(self.driver)
 
         first_product = products_list.find_first_product()
         main_page.click_on_search_field()
@@ -22,8 +24,14 @@ class TestShoppingCart:
         product_page.select_colour()
         product_page.select_size()
         product_page.add_to_cart_first_product()
-
         assert "has been added to your cart" in self.driver.find_element_by_class_name(ProductPageLocators.product_added_to_cart_class).text
+        price1 = product_page.get_product_price()
+        price2 = main_page.get_product_price()
+        main_page.click_on_shopping_cart()
+        price3 = shopping_cart.get_product_price()
+
+        assert "1" in self.driver.find_element_by_class_name(MainPageLocators.cart_count_class).get_attribute("textContent")
+        assert price1 == price2 == price3
 
     @allure.title("Remove a product from the shopping cart")
     def test_remove_from_shopping_cart(self, setup):
