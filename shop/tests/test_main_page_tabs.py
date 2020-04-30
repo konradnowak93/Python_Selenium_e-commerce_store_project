@@ -1,10 +1,11 @@
+import time
 import allure
 import pytest
 from shop.locators.locators import MainPageLocators
 from shop.pages.main_page import MainPage
 from shop.pages.product_page import ProductPage
 from shop.pages.products_list_page import ProductsList
-from shop.pages.shopping_cart_page import ShoppingCartPage
+
 
 @pytest.mark.usefixtures("setup")
 class TestMainPageTabs:
@@ -23,7 +24,9 @@ class TestMainPageTabs:
         main_page.fill_search_field(first_product)
         product_page.select_colour()
         product_page.select_size()
+        self.driver.execute_script("scroll(0, 350)")
         product_page.add_to_cart_first_product()
+        time.sleep(3)
         main_page.click_on_main_logo()
         main_page.click_on_checkout()
         assert "CHECKOUT" in self.driver.find_element_by_class_name(MainPageLocators.page_title_class).text
@@ -80,7 +83,10 @@ class TestMainPageTabs:
         main_page.fill_search_field(first_product)
         product_page.select_colour()
         product_page.select_size()
+        self.driver.execute_script("scroll(0, 350)")
         product_page.add_to_cart_first_product()
+        time.sleep(3)
+        main_page.click_on_main_logo()
         main_page.click_on_checkout()
         assert "CHECKOUT" in self.driver.find_element_by_class_name(MainPageLocators.page_title_class).text
 

@@ -1,3 +1,4 @@
+import time
 import allure
 import pytest
 from shop.locators.locators import ProductPageLocators, ShoppingCartLocators, ProductsListLocators, CheckoutLocators, \
@@ -23,11 +24,12 @@ class TestShoppingCart:
         main_page.fill_search_field(first_product)
         product_page.select_colour()
         product_page.select_size()
+        self.driver.execute_script("scroll(0, 350)")
         product_page.add_to_cart_first_product()
         assert "has been added to your cart" in self.driver.find_element_by_class_name(ProductPageLocators.product_added_to_cart_class).text
         price1 = product_page.get_product_price()
         price2 = main_page.get_product_price()
-        main_page.click_on_shopping_cart()
+        product_page.view_cart()
         price3 = shopping_cart.get_product_price()
 
         assert "1" in self.driver.find_element_by_class_name(MainPageLocators.cart_count_class).get_attribute("textContent")
@@ -46,8 +48,11 @@ class TestShoppingCart:
         main_page.fill_search_field(first_product)
         product_page.select_colour()
         product_page.select_size()
+        self.driver.execute_script("scroll(0, 350)")
         product_page.add_to_cart_first_product()
         product_page.view_cart()
+        time.sleep(2)
+        self.driver.execute_script("scroll(0, 350)")
         shopping_cart.remove_from_cart()
 
         assert "removed" in self.driver.find_element_by_class_name(ShoppingCartLocators.successfully_removed_class).text
@@ -65,16 +70,23 @@ class TestShoppingCart:
         #select first product
         main_page.click_on_search_field()
         main_page.fill_search_field(first_product)
+        time.sleep(3)
+        self.driver.execute_script("scroll(0, 500)")
         product_page.select_colour()
         product_page.select_size()
         product_page.add_to_cart_first_product()
+        time.sleep(3)
         #select second product
         main_page.click_on_search_field()
         main_page.fill_search_field(second_product)
+        time.sleep(3)
+        self.driver.execute_script("scroll(0, 500)")
         product_page.select_colour()
         product_page.select_size()
         product_page.add_to_cart_second_product()
         product_page.view_cart()
+        time.sleep(2)
+        self.driver.execute_script("scroll(0, 500)")
         shopping_cart.clear_cart()
 
         assert "empty" in self.driver.find_element_by_xpath(ShoppingCartLocators.successfully_emptied_xpath).text
@@ -90,12 +102,17 @@ class TestShoppingCart:
         first_product = products_list.find_first_product()
         main_page.click_on_search_field()
         main_page.fill_search_field(first_product)
+        time.sleep(3)
+        self.driver.execute_script("scroll(0, 300)")
         product_page.select_colour()
         product_page.select_size()
         product_page.add_to_cart_first_product()
         product_page.view_cart()
+        time.sleep(3)
+        self.driver.execute_script("scroll(0, 500)")
         shopping_cart.increase_qty()
         shopping_cart.update_cart()
+        time.sleep(2)
 
         assert "updated" in self.driver.find_element_by_xpath(ShoppingCartLocators.successfully_updated_xpath).text
 
@@ -110,10 +127,14 @@ class TestShoppingCart:
         first_product = products_list.find_first_product()
         main_page.click_on_search_field()
         main_page.fill_search_field(first_product)
+        time.sleep(3)
+        self.driver.execute_script("scroll(0, 300)")
         product_page.select_colour()
         product_page.select_size()
         product_page.add_to_cart_first_product()
         product_page.view_cart()
+        time.sleep(3)
+        self.driver.execute_script("scroll(0, 500)")
         shopping_cart.continue_shopping()
 
         assert self.driver.find_element_by_xpath(ProductsListLocators.products_list_xpath).is_displayed()
@@ -129,10 +150,14 @@ class TestShoppingCart:
         first_product = products_list.find_first_product()
         main_page.click_on_search_field()
         main_page.fill_search_field(first_product)
+        time.sleep(3)
+        self.driver.execute_script("scroll(0, 300)")
         product_page.select_colour()
         product_page.select_size()
         product_page.add_to_cart_first_product()
         product_page.view_cart()
+        time.sleep(3)
+        self.driver.execute_script("scroll(0, 700)")
         shopping_cart.proceed_to_checkout()
 
         assert self.driver.find_element_by_id(CheckoutLocators.order_review_heading_id).is_displayed()

@@ -22,10 +22,13 @@ class TestWishlist:
         first_product = products_list.find_first_product()
         main_page.click_on_search_field()
         main_page.fill_search_field(first_product)
+        time.sleep(2)
+        self.driver.execute_script("scroll(0, 350)")
         product_page.add_to_wishlist()
-        time.sleep(3)
+        time.sleep(2)
         main_page.close_information_banner()
         main_page.click_on_my_wishlist()
+        self.driver.execute_script("scroll(0, 350)")
 
         assert self.driver.find_element_by_xpath(WishlistLocators.remove_from_wishlist_button_xpath).is_displayed()
 
@@ -40,10 +43,13 @@ class TestWishlist:
         first_product = products_list.find_first_product()
         main_page.click_on_search_field()
         main_page.fill_search_field(first_product)
+        time.sleep(2)
+        self.driver.execute_script("scroll(0, 350)")
         product_page.add_to_wishlist()
-        time.sleep(3)
+        time.sleep(2)
         main_page.close_information_banner()
         main_page.click_on_my_wishlist()
+        self.driver.execute_script("scroll(0, 350)")
         wishlist.remove_product_from_wishlist()
 
         assert "successfully removed" in self.driver.find_element_by_class_name(WishlistLocators.successfully_removed_class).text
@@ -59,10 +65,13 @@ class TestWishlist:
         first_product = products_list.find_first_product()
         main_page.click_on_search_field()
         main_page.fill_search_field(first_product)
+        time.sleep(2)
+        self.driver.execute_script("scroll(0, 350)")
         product_page.add_to_wishlist()
         time.sleep(3)
         main_page.close_information_banner()
         main_page.click_on_my_wishlist()
+        self.driver.execute_script("scroll(0, 350)")
         wishlist.select_product_options()
 
         assert self.driver.find_element_by_xpath(ProductPageLocators.add_to_cart_first_product_xpath).is_displayed()

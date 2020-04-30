@@ -8,11 +8,16 @@ class DriverFactory:
     def get_driver(browser):
         if browser == "chrome":
             options = webdriver.ChromeOptions()
+            #options.add_argument("--headless")
+            #options.add_argument("--window-size=1920x1080")
             options.add_argument("start-maximized")
             return webdriver.Chrome(ChromeDriverManager().install(), options=options)
         elif browser == "firefox":
             options = webdriver.FirefoxOptions()
+            #options.add_argument("--headless")
+            #options.add_argument("--window-size=1920x1080")
             options.add_argument("start-maximized")
             return webdriver.Firefox(executable_path=GeckoDriverManager().install(), options=options)
+
         raise Exception("Provide a valid browser name")
 

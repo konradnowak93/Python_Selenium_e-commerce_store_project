@@ -7,6 +7,7 @@ from shop.utils.driver_factory import DriverFactory
 def setup(request):
     driver = DriverFactory.get_driver("chrome")
     driver.implicitly_wait(10)
+    driver.maximize_window()
     request.cls.driver = driver
     failures_before_test = request.session.testsfailed
     yield
